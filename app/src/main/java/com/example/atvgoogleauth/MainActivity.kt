@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity() {
         launcher.launch(signInIntent)
     }
 
-    private val launcher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 handleResults(task)
@@ -63,10 +63,11 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
         }
     }
-    private fun updateUI(account: GoogleSignInAccount){
+    https://github.com/BrunoSilveiraEtecZl/GoogleAuth2.0
+    private fun updateUI(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
-            if (it.isSuccessful){
+            if (it.isSuccessful) {
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.putExtra("email", account.email)
                 intent.putExtra("name", account.displayName)
